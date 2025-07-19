@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  movieData: MovieDetails;
+  movieData: Movie;
 }
 
 const Modal: FC<ModalProps> = ({ isOpen, onClose, movieData }) => {

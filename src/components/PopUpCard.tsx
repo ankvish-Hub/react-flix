@@ -31,18 +31,17 @@ const PopUpCard: FC<PopUpCardProps> = ({ isHovered, x, y }) => {
   const [trailerUrl, setTrailerUrl] = useState<string>("");
   const [showTrailer, setShowTrailer] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string>("");
-  const [movieId, setMovieId] = useState<number>(0);
   const [favData, setFavData] = useState<Movie | null>(null);
   const [addedToFavorite, setAddedToFavorite] = useState<boolean>(false);
 
   const handlePopoverMouseLeave = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setCardState((prev: any) => ({
-      ...prev,
+    setCardState({
+      ...cardState,
       isHovered: false,
       cardId: null,
       item: null,
-    }));
+    });
 
     setShowTrailer(false);
   };
@@ -77,10 +76,10 @@ const PopUpCard: FC<PopUpCardProps> = ({ isHovered, x, y }) => {
   useEffect(() => {
     const handleScroll = () => {
       if (cardState.isHovered) {
-        setCardState((prev: any) => ({
-          ...prev,
+        setCardState({
+          ...cardState,
           isHovered: false,
-        }));
+        });
       }
     };
 
@@ -97,9 +96,8 @@ const PopUpCard: FC<PopUpCardProps> = ({ isHovered, x, y }) => {
         `https://image.tmdb.org/t/p/w500${cardState.item.backdrop_path}`
       );
 
-      setTitle(cardState.item.title || "MOVIE");
-      setMovieId(cardState.item.id);
-      setFavData(cardState.item);
+      setTitle(cardState.item?.title || "MOVIE");
+      setFavData(cardState.item || null);
 
       // check if added to list
 
@@ -219,12 +217,12 @@ const PopUpCard: FC<PopUpCardProps> = ({ isHovered, x, y }) => {
           onClick={() => {
             setModalOpen(true);
             setSelectedMovie(favData as Movie);
-            setCardState((prev: any) => ({
-              ...prev,
+            setCardState({
+              ...cardState,
               isHovered: false,
               cardId: null,
               item: null,
-            }));
+            });
           }}
         >
           <ChevronDown size={20} className="h-6 w-6" />

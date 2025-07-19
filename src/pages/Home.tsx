@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { tmdbApi } from "../tmdbApi";
 import { useMovieContext } from "../context/MovieContext";
 import Hero from "../components/Hero";
@@ -94,7 +94,7 @@ const Home: FC = () => {
       {trendingMovies &&<Carousel title="Trending Movies" items={trendingMovies} />}
       {topRatedMovies &&<Carousel title="Top-Rated Movies" items={topRatedMovies} />}
       {genresWithMovies && genresWithMovies.map((movieList)=>(
-        <Carousel key={movieList.id} title={`${movieList.name} Movies`} items={movieList.movies} />
+        <Carousel key={movieList.id} title={`${movieList.name} Movies`} items={movieList.movies ?? []} />
       ))}
       </div>
     </div>

@@ -33,7 +33,7 @@ export const UtilsProvider: FC<{ children: ReactNode }> = ({ children }) => {
           );
           setMovieList(newMovieList);
           localStorage.setItem("movieList", JSON.stringify(newMovieList));
-          setCardState((prev) => ({
+          setCardState((prev: CardState) => ({
             ...prev,
             isHovered: false,
             item: null,
